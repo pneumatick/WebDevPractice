@@ -1,0 +1,24 @@
+body {
+    margin: auto;
+    background-color: #403f5e;
+}
+
+h1 {
+    text-align: center;
+    color: #4e9799;
+}
+
+form {
+    color: #4e9950;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+    text-align: center;
+}
+
+li {
+    color: #97994e;
+    margin: 1%;
+}
