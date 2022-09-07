@@ -1,0 +1,88 @@
+* {
+    font-family: sans-serif;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+header, body, footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header {
+    width: 100%;
+    justify-content: center;
+    border-bottom: 1px solid #ededed;
+}
+
+body {
+    min-height: 480px;
+    flex-direction: column;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0 15px;
+}
+
+.logo-container {
+    width: 150px;
+}
+
+.navbar-logo {
+    width: 40px;
+    height: 40px;
+}
+
+.header-title {
+    flex: 1 1 auto;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.subscribe-bar {
+    padding: 75px 0;
+    display: flex;
+    width: 100%;
+    background-color: purple;
+    flex-direction: column;
+}
+
+.subscribe-input-container {
+    display: flex;
+    justify-content: center;
+}
+
+.subscribe-input {
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#subscribe-text {
+    margin: 0 0 24px 0;
+    text-align: center;
+    color: white;
+}
+
+#subscribe-field {
+    height: 100%;
+    padding: 0;
+    border: none;
+}
+
+#subscribe-button {
+    margin: 5px;
+    border: none;
+    padding: 0;
+    background: purple;
+    color: white;
+    box-shadow: none;
+}
