@@ -16,7 +16,10 @@ class TextBar extends React.Component {
 
   render() {
     return (
-      <form className='task-form' onSubmit={(e) => this.props.onSubmit(e, this.state.value)}>
+      <form 
+        className='task-form' 
+        onSubmit={(e) => this.props.onSubmit(e, this.state.value)}
+      >
         <input 
           className='text-field' 
           type='text' 
@@ -36,13 +39,35 @@ class ListItem extends React.Component {
     this.state = {
       completed: false
     }
+
+    this.handleComplete = this.handleComplete.bind(this);
+  }
+
+  handleComplete() {
+    this.setState((prevState) => {
+        return {
+          completed: !this.state.completed
+        };
+      }
+    );
   }
 
   render() {
     return (
-      <li>
+      <li
+        style={{color: this.state.completed ? 'green' : 'black'}}
+      >
         {this.props.task}
-        <button onClick={() => this.props.deleteItem(this.props.id)}>Delete</button>
+        <button
+          onClick={this.handleComplete}
+        >
+          Done
+        </button>
+        <button 
+          onClick={() => this.props.deleteItem(this.props.id)}
+        >
+          Delete
+        </button>
       </li>
     );
   }
@@ -86,13 +111,18 @@ class List extends React.Component {
 
     let listItems = tasks.map((task, index) => {
       return (
-        <ListItem key={index} id={index} task={task} deleteItem={(id) => this.deleteItem(id)} />
+        <ListItem 
+          key={index} 
+          id={index} 
+          task={task} 
+          deleteItem={(id) => this.deleteItem(id)} 
+        />
       );
     });
 
 
     return (
-      <div>
+      <div className='list-div'>
         <TextBar onSubmit={this.handleSubmit} />
         <ul>
           {listItems}
@@ -106,6 +136,7 @@ class Page extends React.Component {
   render() {
     return (
       <div className='page'>
+        <h1>React To-Do List</h1>
         <List />
       </div>
     );
