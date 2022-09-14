@@ -30,6 +30,24 @@ class TextBar extends React.Component {
   }
 }
 
+class ListItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      completed: false
+    }
+  }
+
+  render() {
+    return (
+      <li>
+        {this.props.task}
+        <button onClick={() => this.props.deleteItem(this.props.id)}>Delete</button>
+      </li>
+    );
+  }
+}
+
 class List extends React.Component {
   constructor(props) {
     super(props);
@@ -53,10 +71,9 @@ class List extends React.Component {
     e.preventDefault();
   }
 
-  deleteItem(e) {
-    let itemIndex = e.target.parentElement.id;
+  deleteItem(id) {
     let tasks = this.state.tasks.slice();
-    tasks.splice(itemIndex, 1);
+    tasks.splice(id, 1);
     this.setState((prevState) => {
       return {
         tasks: tasks.concat()
@@ -69,10 +86,7 @@ class List extends React.Component {
 
     let listItems = tasks.map((task, index) => {
       return (
-        <li key={index} id={index}>
-          {task}
-          <button onClick={this.deleteItem}>Delete</button>
-        </li>
+        <ListItem key={index} id={index} task={task} deleteItem={(id) => this.deleteItem(id)} />
       );
     });
 
