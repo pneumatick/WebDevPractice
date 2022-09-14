@@ -18,7 +18,7 @@ class TextBar extends React.Component {
     return (
       <form className='task-form' onSubmit={(e) => this.props.onSubmit(e, this.state.value)}>
         <input 
-          className='input-field' 
+          className='text-field' 
           type='text' 
           placeholder='Write your task here...'
           onChange={this.handleChange}
@@ -36,21 +36,52 @@ class List extends React.Component {
     this.state = {
       tasks: []
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   handleSubmit(e, value) {
+    let tasks = this.state.tasks.slice();
+
+    this.setState((prevState) => {
+      return {
+        tasks: tasks.concat(value)
+      }
+    });
+
+    e.target.reset();
     e.preventDefault();
-    console.log(value);
+  }
+
+  deleteItem(e) {
+    let itemIndex = e.target.parentElement.id;
+    let tasks = this.state.tasks.slice();
+    tasks.splice(itemIndex, 1);
+    this.setState((prevState) => {
+      return {
+        tasks: tasks.concat()
+      }
+    });
   }
 
   render() {
+    let tasks = this.state.tasks.slice();
+
+    let listItems = tasks.map((task, index) => {
+      return (
+        <li key={index} id={index}>
+          {task}
+          <button onClick={this.deleteItem}>Delete</button>
+        </li>
+      );
+    });
+
+
     return (
       <div>
         <TextBar onSubmit={this.handleSubmit} />
         <ul>
-          <li>List item 1</li>
-          <li>List item 2</li>
-          <li>List item 3</li>
+          {listItems}
         </ul>
       </div>
     );
