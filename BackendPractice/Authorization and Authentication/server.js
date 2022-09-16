@@ -22,11 +22,20 @@ app.use(
 //app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+function verifyAuthentication(req, res, next) {
+    if (req.session.authenticated) {
+        return next();
+    }
+    else {
+        res.status(403).json({ msg: "User is not authorized to view this page" });
+    }
+}
+
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/landingpage', (req, res) => {
+app.get('/landingpage', verifyAuthentication, (req, res) => {
     res.render('landingpage');
 });
 
