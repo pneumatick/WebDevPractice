@@ -6,11 +6,9 @@ const morgan = require('morgan');
 const bcrypt = require('bcrypt');
 
 const PORT = process.env.PORT || 8080;
-//const users = {username: 'test', password: 'pass'};
 const users = {};
 
 app.use(morgan('dev'));
-//app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
     session({
@@ -21,7 +19,6 @@ app.use(
         store
     })
 );
-//app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Authentication middleware
@@ -65,18 +62,10 @@ app.post('/register', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    /*if (users.username !== username) { return res.status(403).json({ msg: `User ${username} not found` }) }
-    if (users.password === password) {
-        req.session.authenticated = true;
-        req.session.user = { username: username, password: password };
-        console.log(req.session);
-        res.redirect('/landingpage');
-    }*/
     try {
         if (!users[username]) { return res.status(403).json({ msg: `User ${username} not found` }) }
 
         const matchedPass = await bcrypt.compare(password, users[username].password);
-        //if (users[username].password === password) {
         if (matchedPass) {
             req.session.authenticated = true;
             req.session.user = { username: username, password: password };
