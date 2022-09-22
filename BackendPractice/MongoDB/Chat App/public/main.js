@@ -5,8 +5,7 @@ const usernameField = document.getElementById('username');
 const messageField = document.getElementById('message');
 
 function addMessage(msg) {
-    console.log(`Message from: ${msg.username}`);
-    chatMessages.innerHTML += `<div>${msg.username}: ${msg.message}</div>`;
+    chatMessages.innerHTML += `<div>${msg}</div>`;
 }
 
 /* Event listeners */
@@ -16,7 +15,7 @@ chatForm.addEventListener('submit', event => {
     let message = messageField.value;
     messageField.value = '';
 
-    socket.emit('chat_message', {username: username, message: message});
+    socket.emit('chat_message', `${username}: ${message}`);
 
     event.preventDefault();
 });
@@ -25,4 +24,12 @@ chatForm.addEventListener('submit', event => {
 
 socket.on('message', msg => {
     addMessage(msg);
+});
+
+socket.on('past-messages', messages => {
+    if (messages.length) {
+        messages.forEach(message => {
+            addMessage(message.msg);
+        });
+    }
 });
