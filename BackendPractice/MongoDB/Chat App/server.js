@@ -28,12 +28,13 @@ server.listen(PORT, () => {
 
 socketio.on('connection', socket => {
     console.log('User connected...');
-    socket.emit('message', 'Welcome to the chat!');
+    socket.emit('message', {username: 'Server', message: 'Welcome to the chat!'});
+
     socket.on('disconnect', () => {
         console.log('User disconnected');
     });
+
     socket.on('chat_message', msg => {
         socketio.emit('message', msg);
-        console.log(msg);   // For testing
     });
 });
