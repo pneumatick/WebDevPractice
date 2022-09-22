@@ -1,0 +1,17 @@
+body, #chat-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#chat-form {
+    width: 50%;
+    padding-bottom: 15px;
+    border-bottom: 1px solid grey;
+}
+
+#message {
+    width: 400px;
+    height: 100px;
+}
