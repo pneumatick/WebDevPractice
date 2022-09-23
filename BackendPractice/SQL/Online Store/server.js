@@ -25,11 +25,19 @@ app.get('/store', (req, res) => {
     res.render('store');
 });
 
-app.get('/inventory', (req, res) => {
-    res.render('inventory');
+app.get('/store/products', async (req, res) => {
+    const products = await getProducts().catch(e => { 
+        console.log(e); 
+        res.status(500).send(); 
+    });
+    res.json(products);
 });
 
 // Note: A router should be made for everything below
+
+app.get('/inventory', (req, res) => {
+    res.render('inventory');
+});
 
 app.post('/inventory/create', async (req, res) => {
     const { product, quantity, price } = req.body;
@@ -62,6 +70,18 @@ app.post('/inventory/delete', async (req, res) => {
 });
 
 /* SQLite */
+
+function getProducts() {
+    return new Promise((resolve, reject) => {
+        inventoryDB.all("SELECT * FROM Inventory", (error, rows) => {
+            if (error) {
+                console.log(error);
+                reject(error);
+            }
+            resolve(rows);
+        });
+    });
+}
 
 function createProduct(product, quantity, price) {
     return new Promise((resolve, reject) => {
