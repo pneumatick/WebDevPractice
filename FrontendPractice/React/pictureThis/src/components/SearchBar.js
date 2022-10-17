@@ -20,7 +20,7 @@ class SearchBar extends React.Component {
     render() {
       return (
         <InputGroup className="search-bar">
-          <Form.Control placeholder="Search..." onChange={this.handleChange} />
+          <Form.Control placeholder="Search..." onChange={this.handleChange}/>
           <Button disabled={!this.state.value}>Search</Button>
         </InputGroup>
       );
