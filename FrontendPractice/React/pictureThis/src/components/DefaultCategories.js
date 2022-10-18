@@ -1,15 +1,17 @@
-import Button from 'react-bootstrap/Button';
+import { NavLink } from 'react-router-dom';
 import React from 'react';
 
 class DefaultCategories extends React.Component {
     render() {
       return (
-        <div className="default-categories">
-          <Button className="default-button">Mountain</Button>
-          <Button className="default-button">Beach</Button>
-          <Button className="default-button">Bird</Button>
-          <Button className="default-button">Food</Button>
-        </div>
+        <nav className="main-nav">
+          <ul>
+            <li><NavLink to="/mountain">Mountain</NavLink></li>
+            <li><NavLink to="/beach">Beaches</NavLink></li>
+            <li><NavLink to="/bird">Birds</NavLink></li>
+            <li><NavLink to="/food">Food</NavLink></li>
+          </ul>
+        </nav>
       );
     }
 }
