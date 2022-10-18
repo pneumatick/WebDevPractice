@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import React from 'react';
 
 class DefaultCategories extends React.Component {
@@ -6,7 +6,7 @@ class DefaultCategories extends React.Component {
       return (
         <nav className="main-nav">
           <ul>
-            <li><NavLink to="/mountain">Mountain</NavLink></li>
+            <li><Link to="/mountain">Mountain</Link></li>
             <li><NavLink to="/beach">Beaches</NavLink></li>
             <li><NavLink to="/bird">Birds</NavLink></li>
             <li><NavLink to="/food">Food</NavLink></li>

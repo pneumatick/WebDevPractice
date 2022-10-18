@@ -1,30 +1,22 @@
 import Button from 'react-bootstrap/Button';
-import InputGroup from 'react-bootstrap/InputGroup';
+//import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
-import React from 'react';
+import React, { useState } from 'react';
 
-class SearchBar extends React.Component {
-    constructor(props) {
-      super(props);
-      this.state = {
-        value: ''
-      };
+//const SearchBar = ({ handleSubmit, history }) => {
+const SearchBar = ({ handleSubmit }) => {
+    const [value, setValue] = useState("")
   
-      this.handleChange = this.handleChange.bind(this);
+    const handleChange = e => {
+      setValue(e.target.value);
     }
-  
-    handleChange(e) {
-      this.setState({value: e.target.value});
-    }
-  
-    render() {
-      return (
-        <InputGroup className="search-bar">
-          <Form.Control placeholder="Search..." onChange={this.handleChange}/>
-          <Button disabled={!this.state.value}>Search</Button>
-        </InputGroup>
-      );
-    }
+
+    return (
+      <form className="search-bar" onSubmit={e => handleSubmit(e, value)}>
+        <Form.Control placeholder="Search..." onChange={handleChange}/>
+        <Button disabled={!value}>Search</Button>
+      </form>
+    );
 }
 
 export default SearchBar;
