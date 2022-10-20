@@ -1,9 +1,7 @@
 import Button from 'react-bootstrap/Button';
-//import InputGroup from 'react-bootstrap/InputGroup';
 import Form from 'react-bootstrap/Form';
 import React, { useState } from 'react';
 
-//const SearchBar = ({ handleSubmit, history }) => {
 const SearchBar = ({ handleSubmit }) => {
     const [value, setValue] = useState("")
   

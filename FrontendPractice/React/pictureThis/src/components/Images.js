@@ -4,12 +4,9 @@ import { PictureContext } from './PictureContext';
 
 const Images = props => {
     let pictures;
-    //let noImages = false;
     let noImages;
     const { images } = useContext(PictureContext);
 
-    //if (props.data.length > 0) {
-    //    images = props.data.map(image => {
     if (images.length > 0) {
         pictures = images.map(image => {
             console.log('new image')
@@ -23,15 +20,12 @@ const Images = props => {
         });
     }
     else {
-        //noImages = true
-        noImages = <div></div>
+        noImages = true
     }
 
     return (
         <div>
-            {/*{noImages ? <h1>No Images</h1> : <ul>{images}</ul>}*/}
-            <ul>{pictures}</ul>
-            {noImages}
+            {noImages ? <h1>No Images</h1> : <ul>{pictures}</ul>}
         </div>
     );
 };
