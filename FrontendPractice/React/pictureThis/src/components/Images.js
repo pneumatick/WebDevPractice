@@ -1,12 +1,17 @@
 import Image from './Image';
-import React from "react";
+import React, { useContext } from "react";
+import { PictureContext } from './PictureContext';
 
 const Images = props => {
-    let images;
-    let noImages = false;
+    let pictures;
+    //let noImages = false;
+    let noImages;
+    const { images } = useContext(PictureContext);
 
-    if (props.data.length > 0) {
-        images = props.data.map(image => {
+    //if (props.data.length > 0) {
+    //    images = props.data.map(image => {
+    if (images.length > 0) {
+        pictures = images.map(image => {
             console.log('new image')
             let farm = image.farm;
             let server = image.server;
@@ -14,17 +19,19 @@ const Images = props => {
             let secret = image.secret;
             let title = image.title;
             let url = `https://farm${farm}.staticflickr.com/${server}/${id}_${secret}_m.jpg`;
-            console.log(title)
             return <Image url={url} alt={title} key={id} />;
         });
     }
     else {
-        noImages = true;
+        //noImages = true
+        noImages = <div></div>
     }
 
     return (
         <div>
-            {noImages ? <h1>No Images</h1> : <ul>{images}</ul>}
+            {/*{noImages ? <h1>No Images</h1> : <ul>{images}</ul>}*/}
+            <ul>{pictures}</ul>
+            {noImages}
         </div>
     );
 };
