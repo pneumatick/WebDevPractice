@@ -30,7 +30,7 @@ class TimerContainer extends React.Component {
                 time: DEFAULT_TIME, 
                 active: false 
             });
-            this.props.toggleWriting();
+            if (this.state.time <= 0) { this.props.toggleWriting(); }
             this.props.presentOutcome();
         }
     }
@@ -39,7 +39,10 @@ class TimerContainer extends React.Component {
         return (
             <div>
                 <TimerHeader writeTime={this.state.time} />
-                <Timer onClick={this.props.toggleWriting} />
+                <Timer 
+                    started={!this.props.disabled}
+                    onClick={this.props.toggleWriting} 
+                />
             </div>
         );
     }

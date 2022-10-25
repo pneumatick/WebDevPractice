@@ -4,7 +4,9 @@ class Timer extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.props.onClick}>Start</button>
+                <button onClick={this.props.onClick}>
+                    {this.props.started ? "Finish" : "Start"}
+                </button>
             </div>
         );
     }

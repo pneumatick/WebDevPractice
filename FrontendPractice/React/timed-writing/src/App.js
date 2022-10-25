@@ -25,6 +25,7 @@ class App extends React.Component {
       this.setState({ text: '' });
     }
     this.setState({ disabled: newState });
+    console.log('toggle');
   }
 
   // Store the user's text input
