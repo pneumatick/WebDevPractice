@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import PictureContextCom from './components/PictureContext';
 import Header from './components/Header';
 import Container from 'react-bootstrap/Container';
-//import ImageArea from './components/ImageArea';
 import Result from './components/Result';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
