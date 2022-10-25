@@ -16,9 +16,14 @@ class App extends React.Component {
     this.presentOutcome = this.presentOutcome.bind(this);
   }
 
-  // Start the timer and let the user write
+  // Start the timer, clear the text area, and let the user write
   toggleWriting() {
     let newState = this.state.disabled ? false : true;
+    // Allow user input to persist in between sessions,
+    // but clear it upon the start of a new session
+    if (this.state.disabled) {
+      this.setState({ text: '' });
+    }
     this.setState({ disabled: newState });
   }
 
@@ -43,7 +48,8 @@ class App extends React.Component {
           />
           <Notepad 
             disabled={this.state.disabled} 
-            onChange={this.handleChange} 
+            onChange={this.handleChange}
+            value={this.state.text} 
           />
         </header>
       </div>
