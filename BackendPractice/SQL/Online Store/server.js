@@ -89,10 +89,28 @@ app.get('/login', (req, res) => {
     res.render('login');
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    console.log(`Log in attempted: ${username}: ${password}`);          // for testing
-    res.redirect('store');
+    
+    try {
+        const user = await queryUser(username);
+        if (!user) { return res.status(403).json({ msg: `User ${username} not found` }) }
+
+        const passMatched = await bcrypt.compare(password, user.password);
+        if (passMatched) {
+            req.session.authenticated = true;
+            //req.session.user = { username: username, password: password };
+            req.session.user = {username: username, permission: user.permission}
+            console.log(req.session); // just for testing, obviously insecure
+            res.redirect('store');
+        }
+        else {
+            res.status(403).json({ msg: 'Bad credentials' });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ msg: err.message });
+    }
 });
 
 app.get('/register', (req, res) => {
@@ -112,8 +130,25 @@ app.get('/store/products', async (req, res) => {
 });
 
 // Note: A router should be made for everything below
+const HIGH_PERMISSIONS = ['admin', 'employee'];
 
-app.get('/inventory', (req, res) => {
+function validateHighPermission(req, res, next) {
+    try {
+        const authenticated = req.session.authenticated;
+        const permissionGranted = HIGH_PERMISSIONS.includes(req.session.user.permission);
+        if (authenticated && permissionGranted) {
+            return next();
+        }
+        else {
+            res.status(403).json({ msg: 'User either lacks permissions or authentication required to view this page.' });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ msg: 'An error has occured, likely because the user hasn\'t logged in.' });
+    }
+}
+
+app.get('/inventory', validateHighPermission, (req, res) => {
     res.render('inventory');
 });
 
