@@ -35,11 +35,16 @@ class TimerContainer extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        clearInterval(this.state.interval);
+    }
+
     render() {
         return (
             <div>
-                <TimerHeader writeTime={this.state.time} />
+                <TimerHeader  />
                 <Timer 
+                    writeTime={this.state.time}
                     started={!this.props.disabled}
                     onClick={this.props.toggleWriting} 
                 />

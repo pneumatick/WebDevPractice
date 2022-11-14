@@ -7,7 +7,38 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+p {
+  margin: 30px 0 8px 0;
+}
+
+button {
+  height: 38px;
+  width:  72px;
+  font-size: 0.55em;
+  background: black;
+  color: rgb(0, 255, 0);
+  border-radius: 5px;
+  border: solid 1px white;
+}
+
+button:hover {
+  background: rgba(0, 0, 0, 0.685);
+}
+
+button:active {
+  background: rgba(0, 0, 0, 0.342);
+}
+
+textarea {
+  width: 50vw;
+  height: 25vh;
+  margin: 24px;
+  border-radius: 5px;
+  font-size: 0.66em;
+  background-color: black;
+  color: rgb(0, 255, 0);
+}
+
+textarea:disabled {
+  color: rgba(0, 255, 0, 0.5);
 }

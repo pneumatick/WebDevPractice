@@ -6,11 +6,13 @@
 
     <body>
         <h1>Register</h1>
-        <form id="register-form">
-            <label for="email">Email</label>
-            <input id="email" type="email" placeholder="Enter your email">
+        <form id="register-form" action="/register" method="post">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="Enter your username">
             <label for="password">Password</label>
-            <input id="password" type="password" placeholder="Enter your password">
+            <input id="password" type="password" name="password" placeholder="Enter your password">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Enter your email">
             <button>Register</button>
         </form>
     </body>
